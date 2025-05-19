@@ -27,9 +27,10 @@ export default defineConfig({
       },
       client: {
         dataReturnType: 'full',
+        baseURL: 'http://localhost:3001'
       },
       mutation: {
-        methods: [ 'post', 'put', 'delete' ],
+        methods: [ 'post', 'put', 'delete', 'patch' ],
       },
       infinite: {
         queryParam: 'next_page',

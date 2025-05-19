@@ -2,6 +2,7 @@ export type { DeleteTasksIdMutationKey } from '../web/hooks/tasksHooks/useDelete
 export type { GetTasksQueryKey } from '../web/hooks/tasksHooks/useGetTasks.ts'
 export type { GetTasksInfiniteQueryKey } from '../web/hooks/tasksHooks/useGetTasksInfinite.ts'
 export type { GetTasksSuspenseQueryKey } from '../web/hooks/tasksHooks/useGetTasksSuspense.ts'
+export type { PatchTasksIdMutationKey } from '../web/hooks/tasksHooks/usePatchTasksId.ts'
 export type { PostTasksMutationKey } from '../web/hooks/tasksHooks/usePostTasks.ts'
 export type {
   DeleteTasksIdPathParams,
@@ -25,5 +26,6 @@ export { deleteTasksIdMutationKey, deleteTasksId, useDeleteTasksId } from '../we
 export { getTasksQueryKey, getTasks, getTasksQueryOptions, useGetTasks } from '../web/hooks/tasksHooks/useGetTasks.ts'
 export { getTasksInfiniteQueryKey, getTasksInfinite, getTasksInfiniteQueryOptions, useGetTasksInfinite } from '../web/hooks/tasksHooks/useGetTasksInfinite.ts'
 export { getTasksSuspenseQueryKey, getTasksSuspense, getTasksSuspenseQueryOptions, useGetTasksSuspense } from '../web/hooks/tasksHooks/useGetTasksSuspense.ts'
+export { patchTasksIdMutationKey, patchTasksId, usePatchTasksId } from '../web/hooks/tasksHooks/usePatchTasksId.ts'
 export { postTasksMutationKey, postTasks, usePostTasks } from '../web/hooks/tasksHooks/usePostTasks.ts'
 export { deleteTasksId204Enum } from './src/gen/types/DeleteTasksId.ts'
