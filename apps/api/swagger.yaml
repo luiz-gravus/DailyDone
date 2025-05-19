@@ -1,0 +1,206 @@
+openapi: 3.0.3
+info:
+  title: DailyDone API
+  description: API para gerenciamento de tarefas diárias
+  version: 1.0.0
+components:
+  securitySchemes: {}
+  schemas: {}
+paths:
+  /tasks:
+    get:
+      tags:
+        - tasks
+      description: Lista todas as tarefas ou filtra por título
+      parameters:
+        - schema:
+            type: string
+            minLength: 1
+          in: query
+          name: title
+          required: false
+          description: Filtro opcional por título
+      responses:
+        '200':
+          description: Lista de tarefas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      format: uuid
+                    title:
+                      type: string
+                    completed:
+                      type: boolean
+                    createdAt:
+                      type: string
+                      description: ISO Date
+                    updatedAt:
+                      type: string
+                      description: ISO Date
+                  required:
+                    - id
+                    - title
+                    - completed
+                    - createdAt
+                    - updatedAt
+                  additionalProperties: false
+                description: Lista de tarefas
+    post:
+      tags:
+        - tasks
+      description: Cria uma nova tarefa
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  minLength: 1
+                  description: Título da tarefa
+              required:
+                - title
+              additionalProperties: false
+        required: true
+      responses:
+        '201':
+          description: Tarefa criada
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                  title:
+                    type: string
+                  completed:
+                    type: boolean
+                  createdAt:
+                    type: string
+                    description: ISO Date
+                  updatedAt:
+                    type: string
+                    description: ISO Date
+                required:
+                  - id
+                  - title
+                  - completed
+                  - createdAt
+                  - updatedAt
+                additionalProperties: false
+                description: Tarefa criada
+  /tasks/{id}:
+    patch:
+      tags:
+        - tasks
+      description: Atualiza uma tarefa existente
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: Novo título (opcional)
+                completed:
+                  type: boolean
+                  description: Status de conclusão (opcional)
+              additionalProperties: false
+      parameters:
+        - schema:
+            type: string
+            format: uuid
+          in: path
+          name: id
+          required: true
+          description: ID da tarefa
+      responses:
+        '200':
+          description: Tarefa atualizada
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                  title:
+                    type: string
+                  completed:
+                    type: boolean
+                  createdAt:
+                    type: string
+                    description: ISO Date
+                  updatedAt:
+                    type: string
+                    description: ISO Date
+                required:
+                  - id
+                  - title
+                  - completed
+                  - createdAt
+                  - updatedAt
+                additionalProperties: false
+                description: Tarefa atualizada
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Mensagem de erro
+                required:
+                  - error
+                additionalProperties: false
+    delete:
+      tags:
+        - tasks
+      description: Remove uma tarefa
+      parameters:
+        - schema:
+            type: string
+            format: uuid
+          in: path
+          name: id
+          required: true
+          description: ID da tarefa
+      responses:
+        '204':
+          description: Tarefa removida com sucesso
+          content:
+            application/json:
+              schema:
+                enum:
+                  - 'null'
+                nullable: true
+                description: Tarefa removida com sucesso
+        '404':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Mensagem de erro
+                required:
+                  - error
+                additionalProperties: false
+servers:
+  - url: http://localhost:3001
+    description: DailyDone API

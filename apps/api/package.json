@@ -4,13 +4,34 @@
     "type": "module",
     "main": "src/index.ts",
     "scripts": {
-        "dev": "tsx watch src/index.ts"
+        "dev": "tsx watch src/index.ts",
+        "prisma:generate": "dotenv -e .env.development -- prisma generate --schema=infra/prisma/schema.prisma",
+        "prisma:migrate:dev": "dotenv -e .env.development -- prisma migrate dev --schema=infra/prisma/schema.prisma",
+        "prisma:migrate:deploy": "dotenv -e .env.development -- prisma migrate deploy --schema=infra/prisma/schema.prisma",
+        "prisma:studio": "dotenv -e .env.development -- prisma studio --schema=infra/prisma/schema.prisma",
+        "services:up": "docker compose -p dailydone -f infra/compose.yaml up -d",
+        "services:stop": "docker compose -p dailydone -f infra/compose.yaml stop",
+        "services:down": "docker compose -p dailydone -f infra/compose.yaml down",
+        "kubb:generate": "kubb generate"
     },
     "dependencies": {
         "@fastify/cors": "^11.0.1",
+        "@fastify/swagger": "^9.5.1",
+        "@fastify/swagger-ui": "^5.2.2",
+        "@prisma/client": "^6.8.0",
+        "dotenv": "^16.0.3",
+        "dotenv-cli": "^8.0.0",
+        "fastify-type-provider-zod": "^4.0.2",
+        "prisma": "^6.8.0",
         "uuid": "^11.1.0"
     },
     "devDependencies": {
-        "@types/uuid": "^10.0.0"
+        "@kubb/cli": "^3.10.12",
+        "@kubb/core": "^3.10.12",
+        "@kubb/plugin-react-query": "^3.10.12",
+        "@types/js-yaml": "^4.0.9",
+        "@types/uuid": "^10.0.0",
+        "js-yaml": "^4.1.0",
+        "tsx": "^4.19.4"
     }
 }
