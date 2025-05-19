@@ -20,7 +20,13 @@ export type GetTasksInfiniteQueryKey = ReturnType<typeof getTasksInfiniteQueryKe
 export async function getTasksInfinite(params?: GetTasksQueryParams, config: Partial<RequestConfig> & { client?: typeof client } = {}) {
   const { client: request = client, ...requestConfig } = config
 
-  const res = await request<GetTasksQueryResponse, ResponseErrorConfig<Error>, unknown>({ method: 'GET', url: `/tasks`, params, ...requestConfig })
+  const res = await request<GetTasksQueryResponse, ResponseErrorConfig<Error>, unknown>({
+    method: 'GET',
+    url: `/tasks`,
+    baseURL: 'http://localhost:3001',
+    params,
+    ...requestConfig,
+  })
   return res
 }
 

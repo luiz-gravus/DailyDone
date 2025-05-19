@@ -23,6 +23,7 @@ export async function deleteTasksId(id: DeleteTasksIdPathParams['id'], config: P
   const res = await request<DeleteTasksIdMutationResponse, ResponseErrorConfig<DeleteTasksId404>, unknown>({
     method: 'DELETE',
     url: `/tasks/${id}`,
+    baseURL: 'http://localhost:3001',
     ...requestConfig,
   })
   return res

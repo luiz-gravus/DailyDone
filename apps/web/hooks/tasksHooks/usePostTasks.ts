@@ -23,6 +23,7 @@ export async function postTasks(data: PostTasksMutationRequest, config: Partial<
   const res = await request<PostTasksMutationResponse, ResponseErrorConfig<Error>, PostTasksMutationRequest>({
     method: 'POST',
     url: `/tasks`,
+    baseURL: 'http://localhost:3001',
     data,
     ...requestConfig,
   })
